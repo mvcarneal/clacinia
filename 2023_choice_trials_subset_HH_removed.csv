@@ -1,0 +1,15 @@
+trial_number,date,family,female,female_sodium,mating_male,mating_male_treatment,combination_treatment,non-mating_male,non-mating_male_treatment,start_time,mating_begins,mating_ends,time_before_copulation,time_before_seconds,copulation_duration,duration_seconds,duration_rounded
+1,7-VI-2023,AB,NS10,low,HS30,high,low_high,NS36,low,0m 00s,24m 00s,53m 00s,24,1440,29m 31s,1771,29.5
+2,8-VI-2023,AB,HS10,high,NS23,low,high_low,HS34,high,0m 00s,0m 46s,32m 00s,1,60,31m 14s,1874,31
+3,8-VI-2023,AB,NS01,low,NS22,low,low_low,HS19,low,7m 00s,46m 25s,1h 16m 08s,39.5,2370,29m 43s,1783,30
+7,11-VI-2023,CD,HS39,high,NS67,low,high_low,HS61,low,0m 00s,6m 14s,50m 00s,6,360,43m 46s,2626,44
+8,11-VI-2023,BD,NS33,low,NS49,low,low_low,HS65,low,10m 00s,35m 50s,1hr 18m 00s,26,1560,42m 10s,2530,42
+9,11-VI-2023,AD,NS15,low,NS47,low,low_low,HS54,low,22m 00s,1hr 24m 00s,2hr 2m 00s,62,3720,38m 00s,2280,38
+10,11-VI-2023,BD,NS31,low,HS67,high,low_high,NS69,low,0m 00s,1hr 0m 00s,1 hr 30m 00s,60,3600,30m 00s,1800,30
+13,12-VI-2023,BD,HS47,high,NS77,low,high_low,HS79,low,0m 00s,24m 30s,1hr 4m 00s,24.5,1470,39m 30s,2370,39.5
+14,12-VI-2023,BD,NS16,low,NS58,low,low_low,HS55,low,11m 00s,1hr 41m 00s,2hr 17m 45s,90,5400,36m 45s,2205,37
+16,12-VI-2023,AD,NS48,low,HS8,high,low_high,NS9,low,35m 00s,52m 30s,1hr 38m,17.5,1050,45m 30s,2730,45.5
+18,12-VI-2023,CD,NS37,low,NS65,low,low_low,HS58,low,1hr 1m 00s,1hr 35m 00s,2hr 6m 00s,24,1440,41m 00s,2460,41
+22,14-VI-2023,CB,NS21,low,HS76,high,low_high,NS90,low,13m 00s,30m 05s,1hr 02m,17,1020,31m 55s,1915,32
+23,14-VI-2023,CD,HS46,high,NS70,low,high_low,HS82,low,31m 00s,48m 30s,1hr 22m 00s,17.5,1050,33m 30s,2010,33.5
+24,17-VI-2023,BD,HS53,high,NS36,low,high_low,HS38,low,0m 00s,30m 00s,1hr 10m 00s,30,1800,40m 00s,2400,40
