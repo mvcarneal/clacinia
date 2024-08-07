@@ -1,0 +1,14 @@
+﻿female,female_sodium,male_sodium,cross_type,clutch_number,hatch_number,adult_number,average_pupation_time,prop_surviving_to_adulthood
+NS01,low,low,low_low,5,424,166,6.451807229,0.3915
+NS10,low,high,low_high,2,318,107,6.168224299,0.3365
+NS15,low,low,low_low,3,78,36,5.916666667,0.4615
+NS16,low,low,low_low,1,5,3,6.333333333,0.6
+NS21,low,high,low_high,3,175,93,5.76344086,0.5314
+NS31,low,high,low_high,4,399,206,6.32038835,0.5163
+NS33,low,low,low_low,3,303,225,5.986666667,0.7426
+NS48,low,high,low_high,1,20,7,5.142857143,0.35
+HS10,high,low,high_low,1,224,7,6.285714286,0.0313
+HS46,high,low,high_low,3,100,15,5.5,0.15
+HS53,high,low,high_low,5,,30,5.666666667,
+HS47,high,low,high_low,1,0,0,,
+NS37,low,low,low_low,0,0,0,,
