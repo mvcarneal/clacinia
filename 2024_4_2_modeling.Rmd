@@ -1,0 +1,206 @@
+---
+title: "C lacinia Modeling"
+author: "Maggie Vincent"
+date: "2024-04-01"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#### Preference measurements
+
+We measured 
+
+```{r}
+
+# load in the data from our subset file -- this subset just means I've split apart the oviposition data and cleaned some things up
+
+# I also added family to this data file and added a few variations of times -- rounded times as well as times in seconds
+
+choiceDF <- as.data.frame(read.csv("~/Work/chlosyne_lacinia/mating_trials_2023/data_code/2023_choice_trials_subset_HH_removed.csv"))
+
+```
+
+
+
+**First, I will model how parental treatment impacts the time before copulation in seconds.**
+
+```{r}
+m1 <- lm(time_before_seconds ~ as.factor(combination_treatment), data = choiceDF)
+
+summary(m1)
+
+res1 <- resid(m1)
+
+hist(res1)
+
+# I am going to try log-transforming time_before_seconds to see if the residuals are better; I'd like the median to be closer to 0 with a more even distribution overall
+
+m2 <- lm(log(time_before_seconds) ~ as.factor(combination_treatment), data = choiceDF)
+
+summary(m2)
+
+res2 <- resid(m2)
+
+hist(res2)
+
+# they're not perfect but the median is much better so I'll stick with the log-transformed variable for this model
+
+```
+
+# log(time before copulation) ~ combination treatment
+
+F2,11 = 3.114; p-value = 0.0847.
+
+
+
+**Now I will model the effect of mating pair treatment on the duration of copulation in seconds.**
+
+```{r}
+
+m3 <- lm(duration_seconds ~ as.factor(combination_treatment), data = choiceDF)
+
+summary(m3)
+
+# I am happy with these residuals, we get a median of 0 with min/max of -468/676
+
+# I am not going to transform anything here
+
+res3 <- resid(m3)
+
+hist(res3)
+
+```
+
+
+# duration of copulation ~ combination treatment
+
+F2,11 = 0.4678, p = 0.6383
+
+
+
+
+##### Fitness Proxies
+
+
+Measurements: number of clutches, number of hatched offspring, number of adult offspring, and average pupation time in days.
+
+
+```{r}
+# load in the fitness df
+
+fitnessDF <- as.data.frame(read.csv("~/Work/chlosyne_lacinia/mating_trials_2023/data_code/choice_f2_fitness_data_HH_removed.csv"))
+```
+
+
+
+**Modeling the effect of parental treatment on clutch number**
+
+
+```{r}
+
+m4 <- lm(clutch_number ~ as.factor(cross_type), data = fitnessDF)
+
+summary(m4)
+
+res4 <- resid(m4)
+
+hist(res4)
+
+# these residuals look normal, I am not going to transform anything
+
+```
+
+
+# clutch number ~ parental treatments
+
+F2,10 = 0.004931, p = 0.9951
+
+
+
+**Modeling the effect of parental treatment on the number of hatching offspring**
+
+
+```{r}
+
+m5 <- lm(hatch_number ~ as.factor(cross_type), data = fitnessDF)
+
+summary(m5)
+
+res5 <- resid(m5)
+
+hist(res5)
+
+# residuals are not centered at 0 (median = -8), but they are evenly distributed
+
+```
+
+
+# hatch number ~ parental treatment
+
+F2,9 = 0.4464, p = 0.6533
+
+
+
+**Modeling the effect of parental treatment on the number of adult offspring**
+
+
+```{r}
+m6 <- lm(adult_number ~ as.factor(cross_type), data = fitnessDF)
+
+summary(m6)
+
+res6 <- resid(m6)
+
+hist(res6)
+
+# the residuals are not very normal, I am going to transform adult number and try again
+
+fitnessDF_noNA <- na.omit(fitnessDF)
+
+m7 <- lm(log(adult_number) ~ as.factor(cross_type), data = fitnessDF_noNA)
+
+summary(m7)
+
+res7 <- resid(m7)
+
+hist(res7)
+
+# not amazing, but better, we will use this one
+```
+
+
+# log(adult number of offspring) ~ parental treatment
+
+F2,7 = 0.8406, p = 0.4708
+
+
+
+**Modeling the effect of parental treatment on the average pupation time of offspring**
+
+
+```{r}
+m8 <- lm(average_pupation_time ~ as.factor(cross_type), data = fitnessDF)
+
+summary(m8)
+
+res8 <- resid(m8)
+
+hist(res8)
+
+# residuals look good
+```
+
+
+# average pupation time of offspring ~ parental treatment
+
+F2,8 = 0.8438, p = 0.4651
+
+
+
+
+
+
+

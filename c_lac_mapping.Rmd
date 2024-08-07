@@ -1,0 +1,139 @@
+---
+title: "C Lacinia Mapping"
+author: "Maggie Vincent"
+date: "2024-02-19"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Mapping practice
+
+I am following the documentation from https://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html
+
+```{r}
+library(ggplot2)
+library(ggmap)
+library(maps)
+library(mapdata)
+```
+
+The packages maps and mapdata have outlines and ggmap and ggplot2 are so I can plot maps.
+
+```{r}
+usa <- map_data("usa")
+ggplot() + geom_polygon(data = usa, aes(x=long, y = lat, group = group)) + 
+  coord_fixed(1.3)
+```
+
+This is a basic, filled in map of the USA. I can make aesthetic adjustments.
+
+```{r}
+ggplot() + 
+  geom_polygon(data = usa, aes(x=long, y = lat, group = group), fill = NA, color = "red") + 
+  coord_fixed(1.3)
+```
+
+Another example of aesthetic adjustments, this time with a fill color.
+
+```{r}
+gg1 <- ggplot() + 
+  geom_polygon(data = usa, aes(x=long, y = lat, group = group), fill = "violet", color = "blue") + 
+  coord_fixed(1.3)
+gg1
+```
+
+
+### Adding points to the map.
+
+```{r}
+labs <- data.frame(
+  long = c(-122.064873, -122.306417), #give the long of the two points
+  lat = c(36.951968, 47.644855), #give the lat of the two points
+  names = c("SWFSC-FED", "NWFSC"), #here they are naming the two points
+  stringsAsFactors = FALSE
+  )
+
+gg1 + 
+  geom_point(data = labs, aes(x = long, y = lat), color = "black", size = 5) +
+  geom_point(data = labs, aes(x = long, y = lat), color = "yellow", size = 4)
+
+#the first geom_point line is to make the whole dot and the second line is to fill it in with yellow
+```
+
+### Now just mapping one state, the example given is California
+
+```{r}
+
+ca_df <- subset(states, region == "california")
+
+ca_county <- subset(counties, region == "california")
+
+ca_base <- ggplot(data = ca_df, mapping = aes(x = long, y = lat, group = group)) + 
+  coord_fixed(1.3) + 
+  geom_polygon(color = "black", fill = "gray")
+
+ca_base + 
+  geom_polygon(data = ca_county, fill = NA, color = "white") +
+  geom_polygon(color = "black", fill = NA)  # get the state border back on top
+
+```
+
+
+Okay I want to subset to just a map of Texas.
+
+```{r}
+states <- map_data("state")
+
+tex_map <- subset(states, region == "texas")
+
+counties <- map_data("county")
+tx_county <- subset(counties, region == "texas")
+
+# map of Texas, no county lines
+tx_base <- ggplot(data = tex_map, mapping = aes(x = long, y = lat)) +
+  coord_fixed(1.3) + 
+  geom_polygon(color = "black", fill = "white")
+
+
+#adding county lines
+tx_base + geom_polygon(data = tx_county, fill = NA, color = "white") +
+  geom_polygon(color = "black", fill = NA)  # get the state border back on top
+
+
+```
+
+### Adding coordinates
+
+```{r}
+
+colony_1_coordinates <- data.frame(long = c(-99.19156
+, -99.817, -99.817, -99.589, -99.472, -99.472, -99.472, -98.663), lat = c(28.66565, 28.493, 28.493, 28.124, 27.877, 27.876, 27.877, 26.316), names = c("pop 1", "pop 2", "pop 3", "pop 4", "pop 5", "pop 6", "pop 7", "pop 8"),
+  stringsAsFactors = FALSE)
+
+
+
+# now I will add colony 1 coordinates to my base map of Texas and save that as an object
+
+tx_col1_only <- tx_base + 
+  geom_point(data = colony_1_coordinates, aes(x = long, y = lat), color = "black", size = 2)
+
+# add colony 2 coordinates to tx_col1_only but pick a different color so it's clear
+
+colony_2_coordinates <- as.data.frame(read.csv("~/Work/chlosyne_lacinia/mating_trials_2023/data_code/colony_2_coordinates.csv"))
+                         
+
+c2_coords <- colony_2_coordinates %>%
+  rename(long = longitude,
+         lat = latitude)
+
+c_lac_collection_map <- tx_col1_only + 
+  geom_point(data = c2_coords, aes(x = long, y = lat), color = "orange", size = 2)
+
+
+```
+
+
+

@@ -1,0 +1,66 @@
+---
+title: "C. lacinia Mate Choice"
+author: "Maggie Vincent"
+date: "2024-02-02"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+# I have mate/no mate data from the choice and no choice trials. I want to see if they differ from each other more than expected by chance. 
+
+```{r}
+mate_nomate_all <- as.data.frame(read.csv("~/Work/chlosyne_lacinia/mating_trials_2023/data_code/all_mate_no_mate_CL.csv"))
+
+choice_chi_data <-  as.data.frame(read.csv("~/Work/chlosyne_lacinia/mating_trials_2023/data_code/chi_treatment_choice_numeric.csv"))
+```
+
+
+# I have a dataframe with the mate/no mate counts for the choice and no choice trials.
+
+chisq.test(x=mate_nomate_all$choice, p=mate_nomate_all$no_choice, rescale.p = TRUE)
+
+# The mate/no mate counts are significantly different between the choice and no choice trials.
+
+
+``` {r}
+# I want to see if the choice is different than it would be if females picked randomly
+
+
+chisq.test(choice_chi_data$female_high, choice_chi_data$female_low, correct=FALSE)
+
+# In the two chi squared tests above, the observed data does not differ from what we would predict if random mating was occurring. 
+```
+
+Kyle had some concerns about not doing a proper pairwise comparison in the above test, so I did some reading. I found a package called "rcompanion" with the function "pairwiseNominalIndependence" so I am going to try that below.
+
+
+
+```{r}
+
+library(rcompanion)
+
+pairwiseNominalIndependence(choice_chi_data,
+                            fisher = FALSE,
+                            gtest = FALSE,
+                            chisq = TRUE,
+                            stats = TRUE
+                            )
+
+
+
+
+```
+
+
+
+
+
+
+
+
+
