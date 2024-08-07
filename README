@@ -2,3 +2,18 @@ Chlosyne lacinia 2023-2024 Project ReadMe
 
 This github project corresponds to my second dissertation chapter regarding the effect of larval sodium access on adult mating behavior in C. lacinia. In this project folder,
 there will be a raw data file, a manipulated data file, a metadata document, and my R scripts used to run my analyses.
+
+Files and descriptions:
+
+2023_choice_trials_subset.csv: a subset of the "raw_data" file with only the Choice trial data
+2023_choice_trials_subset_HH_removed.csv: the "2023_choice_trials_subset" with one entry removed, the single High-Sodium x High-Sodium pairing. This was used for analysis
+2024_4_2_modeling.Rmd: R script for the ANOVAs, using "2023_choice_trials_subset_HH_removed" and "choice_f2_fitness_data_HH_removed"
+all_mate_no_mate_CL.csv: the mating vs. not mating outcomes for both the Choice and No Choice trials
+c_lac_mapping.Rmd: R script for creating a map of the C. lacinia collection sites, uses files "colony_1_coordinates.csv" and "colony_2_coordinates.csv"
+chi_squared_code.Rmd: the Chi squared code, uses the files "all_mate_no_mate_CL.csv" and "chi_treatment_choice_numeric.csv"
+choice_f2_fitness_data.csv: a subset of the "raw_data" file with only the Choice trial fitness data
+choice_f2_fitness_data_HH_removed: the "choice_f2_fitness_data.csv" with one entry removed, the single High-Sodium x High-Sodium pairing
+colony_1_coordinates.csv: the latitude and longitude of the C. lacinia populations from Texas used in the Choice trials
+colony_2_coordinates.csv: the latitude and longitude of the C. lacinia populations from Texas used in the No Choice trials
+metadata.docx: a document detailing the experiment
+raw_data.xlsx: the original data file
